@@ -1,0 +1,148 @@
+/* General Styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+}
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #b3e5fc, #f8bbd0, #ffffff);
+  background-size: 400% 400%;
+  animation: gradient-animation 10s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Content Styling */
+.homepage-content {
+  z-index: 2;
+}
+
+.homepage-title {
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.homepage-description {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 2rem;
+  padding: 0 20px;
+  max-width: 50vw;
+}
+
+.homepage-cta-button {
+  font-size: 1.2rem;
+  padding: 15px 30px;
+  background-color: white;
+  color: rgb(53, 53, 53);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.homepage-cta-button:hover {
+  background-color: rgb(243, 229, 255);
+  transform: scale(1.05);
+}
+
+/* Floating Cards Styling */
+.homepage-floating-cards {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden; /* Prevent overflowing cards */
+}
+
+/* Floating Cards Styling */
+.card-template {
+    position: absolute;
+    width: 200px;
+    height: 300px;
+    border-radius: 16px;
+    background-size: cover;
+    background-repeat: no-repeat; /* Prevent tiling */
+    background-position: center; /* Center the image */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    animation-duration: 5s ease-in-out infinite;
+  }
+  
+  /* Unique Transformations for Each Card */
+  .card-template:nth-child(1) {
+    top: 70%;
+    left: 10%;
+    animation: float1 6s ease-in-out infinite;
+  }
+  
+  .card-template:nth-child(2) {
+    top: -4%;
+    left: 50%;
+    animation: float2 7s ease-in-out infinite;
+  }
+  
+  .card-template:nth-child(3) {
+    top: 60%;
+    left: 80%;
+    animation: float3 5s ease-in-out infinite;
+  }
+  
+  /* Animations with Unique Rotations */
+  @keyframes float1 {
+    0% {
+      transform: translateY(0px) rotate(5deg);
+    }
+    50% {
+      transform: translateY(-20px) rotate(10deg);
+    }
+    100% {
+      transform: translateY(0px) rotate(5deg);
+    }
+  }
+  
+  @keyframes float2 {
+    0% {
+      transform: translateY(0px) rotate(-10deg);
+    }
+    50% {
+      transform: translateY(-30px) rotate(-5deg);
+    }
+    100% {
+      transform: translateY(0px) rotate(-10deg);
+    }
+  }
+  
+  @keyframes float3 {
+    0% {
+      transform: translateY(0px) rotate(15deg);
+    }
+    50% {
+      transform: translateY(-10px) rotate(20deg);
+    }
+    100% {
+      transform: translateY(0px) rotate(15deg);
+    }
+  }
