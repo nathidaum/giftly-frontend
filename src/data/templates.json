@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "category": "Birthday",
+    "title": "It's gonna be lit",
+    "image": "/public/birthday1.png",
+    "fontStyle": "Comic Sans MS"
+  },
+  {
+    "id": 2,
+    "category": "Birthday",
+    "title": "Confetti wishes",
+    "image": "/public/birthday2.png",
+    "fontStyle": "Times New Roman"
+  },
+  {
+    "id": 3,
+    "category": "Birthday",
+    "title": "Sprinkling you with wishes",
+    "image": "/public/birthday3.png",
+    "fontStyle": "Arial"
+  },
+  {
+    "id": 4,
+    "category": "Farewell",
+    "title": "Hope our paths croissant again",
+    "image": "/public/farewell1.png",
+    "fontStyle": "Georgia"
+  },
+  {
+    "id": 5,
+    "category": "Farewell",
+    "title": "Donut want to say goodbye",
+    "image": "/public/farewell2.png",
+    "fontStyle": "Verdana"
+  },
+  {
+    "id": 6,
+    "category": "Farewell",
+    "title": "Waddle I do without you?",
+    "image": "/public/farewell3.png",
+    "fontStyle": "Courier New"
+  },
+  {
+    "id": 7,
+    "category": "Thank You",
+    "title": "Simple Thanks",
+    "image": "/public/thankyou1.png",
+    "fontStyle": "Helvetica"
+  },
+  {
+    "id": 8,
+    "category": "Thank You",
+    "title": "Big Thank You!",
+    "image": "/public/thankyou2.png",
+    "fontStyle": "Open Sans"
+  }
+]
