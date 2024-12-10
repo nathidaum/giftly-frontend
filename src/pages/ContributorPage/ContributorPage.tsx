@@ -136,7 +136,7 @@ const ContributorPage = () => {
 
         {/* Contribution Form */}
         <form className="contributor-form">
-          <h1 className="contributor-title">{card.title}</h1>
+          <h1 className="title">{card.title}</h1>
           <label>{card.message}</label>
           <textarea
             placeholder="Write your heartfelt message here..."

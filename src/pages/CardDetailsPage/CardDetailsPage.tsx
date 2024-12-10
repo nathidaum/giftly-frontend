@@ -77,7 +77,7 @@ const CardDetailsPage = () => {
 
   return (
     <div className="card-details-page">
-      <h1 className="card-details-title">{card.title}</h1>
+      <h1 className="title-center">{card.title}</h1>
       <div className="card-details-container">
         {/* Carousel */}
         <div className="card-carousel">

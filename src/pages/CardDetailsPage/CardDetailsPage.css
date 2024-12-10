@@ -1,33 +1,3 @@
-.card-details-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100vh;
-  background: linear-gradient(150deg, #323335, #3d3f4d, #333);
-  background-size: 400% 400%;
-  animation: gradient-animation 20s ease infinite;
-}
-
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.card-details-title {
-  font-size: 2.5rem;
-  color: white;
-  margin-bottom: 10px;
-}
-
 .card-details-container {
   display: flex;
   flex-direction: column;

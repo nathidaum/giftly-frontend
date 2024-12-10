@@ -103,7 +103,7 @@ const CardCreationPage = () => {
 
         {/* Card Details Form */}
         <form className="card-creation-form">
-          <h1 className="card-creation-title">
+          <h1 className="title">
             let’s make it personal & special! 🎉
           </h1>
           <label>give your card a nice title</label>
