@@ -117,7 +117,7 @@ const ContributorPage = () => {
             onClick={handleAddMessage}
             className="contributor-button"
           >
-            Add your message
+            send your message
           </button>
         </form>
         </div>

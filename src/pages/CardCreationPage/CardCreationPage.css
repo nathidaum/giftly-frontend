@@ -108,12 +108,15 @@
 
 /* Card Form */
 .card-creation-form {
-  padding: 50px;
+  padding: 30px 50px;
   gap: 15px;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 0.2);
+  justify-content: flex-start;
+  flex: 1;
+  width: 700px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
   color: #333;
   border-radius: 20px;
   box-sizing: border-box;
@@ -121,7 +124,7 @@
 }
 
 .card-creation-form label {
-  color: #333;
+  color: rgba(255, 255, 255, 0.4);
   text-align: left;
 }
 
@@ -136,8 +139,8 @@
   font-weight: 500;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: grey;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #333;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
