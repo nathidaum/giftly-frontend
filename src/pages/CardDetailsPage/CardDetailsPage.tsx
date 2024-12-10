@@ -9,6 +9,7 @@ const CardDetailsPage = () => {
   const navigate = useNavigate();
   const [card, setCard] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0); // Track the current carousel slide
 
   useEffect(() => {
     if (!id) {
@@ -34,6 +35,21 @@ const CardDetailsPage = () => {
     fetchCard();
   }, [id, navigate]);
 
+  // card & message carousel
+  const handleNextSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === card.messages.length ? 0 : prevSlide + 1
+    );
+  };
+
+  const handlePreviousSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? card.messages.length : prevSlide - 1
+    );
+  };
+  const isCoverSlide = currentSlide === 0;
+
+  // button actions
   const handleShareCard = () => {
     const contributorLink = `${window.location.origin}/cards/share/${card.shareableLink}`;
     navigator.clipboard.writeText(contributorLink);
@@ -63,35 +79,44 @@ const CardDetailsPage = () => {
     <div className="card-details-page">
       <h1 className="card-details-title">{card.title}</h1>
       <div className="card-details-container">
-        {/* Card Preview */}
-        <div className="card-preview">
-          <div
-            className="card-preview-template"
-            style={{
-              backgroundImage: `url(${card.template?.image})`,
-            }}
-          ></div>
-          <div className="card-content">
-            <h2>{card.title}</h2>
-            <p>{card.message}</p>
-          </div>
-        </div>
-
-        {/* Messages Section */}
-        <div className="card-messages">
-          {card.messages?.length > 0 ? (
-            card.messages.map((msg: any, index: number) => (
-              <div key={index} className="card-message">
-                {msg.gifUrl && (
-                  <img src={msg.gifUrl} alt="GIF" className="message-gif" />
+        {/* Carousel */}
+        <div className="card-carousel">
+          <button
+            className="carousel-arrow left-arrow"
+            onClick={handlePreviousSlide}
+          >
+            ◀
+          </button>
+          <div className="carousel-slide">
+            {isCoverSlide ? (
+              <div
+                className="carousel-cover"
+                style={{ backgroundImage: `url(${card.template?.image})` }}
+              ></div>
+            ) : (
+              <div className="carousel-message">
+                {card.messages[currentSlide - 1]?.gifUrl && (
+                  <img
+                    src={card.messages[currentSlide - 1].gifUrl}
+                    alt="GIF"
+                    className="carousel-gif"
+                  />
                 )}
-                <p className="message-text">{msg.text}</p>
-                <p className="message-author">- {msg.author}</p>
+                <p className="carousel-text">
+                  {card.messages[currentSlide - 1]?.text}
+                </p>
+                <p className="carousel-author">
+                  - {card.messages[currentSlide - 1]?.author}
+                </p>
               </div>
-            ))
-          ) : (
-            <p className="no-messages">No messages yet!</p>
-          )}
+            )}
+          </div>
+          <button
+            className="carousel-arrow right-arrow"
+            onClick={handleNextSlide}
+          >
+            ▶
+          </button>
         </div>
 
         {/* Actions */}
