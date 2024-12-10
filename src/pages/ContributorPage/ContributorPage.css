@@ -1,0 +1,161 @@
+/* General Styling */
+.contributor-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  background: linear-gradient(150deg, #b3bafc, #2d3043, #323232);
+  background-size: 400% 400%;
+  animation: gradient-animation 20s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.contributor-title {
+  font-size: 2rem;
+  color: white;
+  text-align: left;
+}
+
+/* Contributor Container */
+.contributor-container {
+  display: flex;
+  width: 100%;
+  max-height: 800ox;
+  max-width: 1200px;
+}
+
+/* Card Preview */
+.contributor-card-preview {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  
+}
+
+.contributor-card-preview-template {
+  padding: 20px;
+  width: 400px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(255, 255, 2550, 0.6);
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Preview Content Styling */
+.preview-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #333;
+}
+
+.preview-gif {
+  width: 100%;
+  max-height: 50%;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.preview-text {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  text-align:justify
+}
+
+.preview-author {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Card Form */
+.contributor-form {
+  padding: 20px 50px;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  width: 700px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contributor-form label {
+  color: white;
+  text-align: left;
+}
+
+.contributor-input,
+.contributor-textarea {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid transparent;
+  border-radius: 1em;
+  font-size: rem;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contributor-input:focus,
+.contributor-textarea:focus {
+  outline: none;
+  border-color: #dfdfdf;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.contributor-textarea {
+  height: 120px;
+  resize: none;
+}
+
+/* Submit Button */
+.contributor-button {
+  padding: 15px 30px;
+  background-color: #8187b7;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.contributor-button:hover {
+  background-color: #7378a3;
+}
