@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getCardByShareableLink, addMessageToCard } from "../../api";
@@ -26,6 +26,8 @@ const ContributorPage = () => {
   const [gifUrl, setGifUrl] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
+  const textAreaRef = useRef<HTMLTextAreaElement>(null); // Create a reference for the textarea
+
   // Giphy-related state
   const [gifSearch, setGifSearch] = useState("");
   const [gifResults, setGifResults] = useState<any[]>([]);
@@ -51,6 +53,13 @@ const ContributorPage = () => {
 
     fetchCard();
   }, [shareableLink, navigate]);
+
+  // Focus the textarea whenever text is empty
+  useEffect(() => {
+    if (textAreaRef.current && text === "") {
+      textAreaRef.current.focus();
+    }
+  }, [text]);
 
   const handleGifSearch = async () => {
     if (!gifSearch.trim()) {
@@ -108,6 +117,19 @@ const ContributorPage = () => {
 
   return (
     <div className="contributor-page">
+      <div className="contributor-info">
+        <h1> {card.title}</h1>
+        <p> {card.message}</p>
+
+        <button
+          type="button"
+          onClick={handleAddMessage}
+          className={`contributor-button ${!text || !author ? "disabled" : ""}`}
+          disabled={!text || !author} // Disable button if inputs are empty
+        >
+          Send your message
+        </button>
+      </div>
       <div className="contributor-container">
         {/* Card Preview */}
         <div className="contributor-card-preview">
@@ -125,95 +147,85 @@ const ContributorPage = () => {
                 <img src={gifUrl} alt="Selected GIF" className="preview-gif" />
               ) : (
                 <div className="add-gif">
-                <p>Add a GIF 📸 </p>
+                  <p>Add a GIF 📸 </p>
                 </div>
               )}
             </div>
             <div className="preview-content">
-              <p className="preview-text">{text || "Preview of your text..."}</p>
-              <p className="preview-author">{author || "Your name here"}</p>
+              <textarea
+                ref={textAreaRef}
+                placeholder="Write some nice words here..."
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className="contributor-textarea"
+                maxLength={500}
+              ></textarea>
+              <input
+                type="text"
+                placeholder=" - Your name"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                className="contributor-input"
+              />
             </div>
           </div>
         </div>
-
-        {/* Contribution Form */}
-        <form className="contributor-form">
-          <h1 className="title">{card.title}</h1>
-          <label>{card.message}</label>
-          <textarea
-            placeholder="Write your heartfelt message here..."
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            className="contributor-textarea"
-          ></textarea>
-          <label>Sign your name</label>
-          <input
-            type="text"
-            placeholder="Your name"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            className="contributor-input"
-          />
-          <button
-            type="button"
-            onClick={handleAddMessage}
-            className="contributor-button"
-          >
-            Send your message
-          </button>
-        </form>
       </div>
 
-{/* GIF Search Modal */}
-{isGifModalOpen && (
-  <div className="gif-modal">
-    <div className="gif-modal-overlay" onClick={() => setIsGifModalOpen(false)}></div>
-    <div className="gif-modal-content">
-      <button
-        className="close-modal-button"
-        onClick={() => setIsGifModalOpen(false)}
-      >
-        ×
-      </button>
-      <h2 className="gif-modal-title">Search for a GIF</h2>
-      <div className="gif-search-section">
-        <input
-          type="text"
-          placeholder="Type to search for GIFs..."
-          value={gifSearch}
-          onChange={(e) => setGifSearch(e.target.value)}
-          className="gif-search-input"
-        />
-        <button
-          type="button"
-          onClick={handleGifSearch}
-          className="gif-search-button"
-        >
-          Search
-        </button>
-      </div>
-      <div className="gif-results">
-        {gifResults.length > 0 ? (
-          gifResults.map((gif) => (
-            <img
-              key={gif.id}
-              src={gif.images.fixed_height.url}
-              alt={gif.title}
-              className="gif-result"
-              onClick={() => {
-                setGifUrl(gif.images.fixed_height.url);
-                setIsGifModalOpen(false);
-              }}
-            />
-          ))
-        ) : (
-          <p className="gif-no-results">No GIFs found. Try a different keyword!</p>
-        )}
-      </div>
-    </div>
-  </div>
-)}
-
+      {/* GIF Search Modal */}
+      {isGifModalOpen && (
+        <div className="gif-modal">
+          <div
+            className="gif-modal-overlay"
+            onClick={() => setIsGifModalOpen(false)}
+          ></div>
+          <div className="gif-modal-content">
+            <button
+              className="close-modal-button"
+              onClick={() => setIsGifModalOpen(false)}
+            >
+              ×
+            </button>
+            <h2 className="gif-modal-title">Search for a GIF</h2>
+            <div className="gif-search-section">
+              <input
+                type="text"
+                placeholder="Type to search for GIFs..."
+                value={gifSearch}
+                onChange={(e) => setGifSearch(e.target.value)}
+                className="gif-search-input"
+              />
+              <button
+                type="button"
+                onClick={handleGifSearch}
+                className="gif-search-button"
+              >
+                Search
+              </button>
+            </div>
+            <div className="gif-results">
+              {gifResults.length > 0 ? (
+                gifResults.map((gif) => (
+                  <img
+                    key={gif.id}
+                    src={gif.images.fixed_height.url}
+                    alt={gif.title}
+                    className="gif-result"
+                    onClick={() => {
+                      setGifUrl(gif.images.fixed_height.url);
+                      setIsGifModalOpen(false);
+                    }}
+                  />
+                ))
+              ) : (
+                <p className="gif-no-results">
+                  No GIFs found. Try a different keyword!
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
