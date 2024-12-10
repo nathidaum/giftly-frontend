@@ -124,12 +124,14 @@ const ContributorPage = () => {
               {gifUrl ? (
                 <img src={gifUrl} alt="Selected GIF" className="preview-gif" />
               ) : (
-                <p>Click to add a GIF</p>
+                <div className="add-gif">
+                <p>Add a GIF 📸 </p>
+                </div>
               )}
             </div>
             <div className="preview-content">
-              <p className="preview-text">{text || "Write your message..."}</p>
-              <p className="preview-author">{author || "Your name"}</p>
+              <p className="preview-text">{text || "Preview of your text..."}</p>
+              <p className="preview-author">{author || "Your name here"}</p>
             </div>
           </div>
         </div>
