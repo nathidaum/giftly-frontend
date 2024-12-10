@@ -1,7 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { getCardByShareableLink, addMessageToCard } from "../../api";
 import "./ContributorPage.css";
+
+const GIPHY_API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
+
+// Debounce utility (for the GIPHY API rate limit)
+type Procedure = (...args: any[]) => void;
+const debounce = <F extends Procedure>(func: F, delay: number): F => {
+  let timeout: ReturnType<typeof setTimeout>;
+  return ((...args: Parameters<F>) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), delay);
+  }) as F;
+};
 
 const ContributorPage = () => {
   const { shareableLink } = useParams<{ shareableLink: string }>();
@@ -10,8 +23,13 @@ const ContributorPage = () => {
   const [card, setCard] = useState<any>(null);
   const [author, setAuthor] = useState("");
   const [text, setText] = useState("");
-  const [gifUrl, setGifUrl] = useState(""); // Optional
+  const [gifUrl, setGifUrl] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+  // Giphy-related state
+  const [gifSearch, setGifSearch] = useState("");
+  const [gifResults, setGifResults] = useState<any[]>([]);
+  const [isGifModalOpen, setIsGifModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchCard = async () => {
@@ -33,6 +51,32 @@ const ContributorPage = () => {
 
     fetchCard();
   }, [shareableLink, navigate]);
+
+  const handleGifSearch = async () => {
+    if (!gifSearch.trim()) {
+      alert("Please enter a keyword to search for GIFs.");
+      return;
+    }
+
+    try {
+      const response = await axios.get(`https://api.giphy.com/v1/gifs/search`, {
+        params: {
+          api_key: GIPHY_API_KEY,
+          q: gifSearch,
+          limit: 10, // Fetch 10 results
+        },
+      });
+      setGifResults(response.data.data);
+    } catch (error) {
+      console.error("Error fetching GIFs:", error);
+      alert("Failed to fetch GIFs. Please try again.");
+    }
+  };
+
+  // Debounced search
+  const debouncedGifSearch = debounce(() => {
+    handleGifSearch();
+  }, 500);
 
   const handleAddMessage = async () => {
     if (!author || !text) {
@@ -73,22 +117,26 @@ const ContributorPage = () => {
               backgroundImage: `url(${card.template?.image || ""})`,
             }}
           >
-            <div className="preview-content">
-              {gifUrl && (
-                <img src={gifUrl} alt="GIF preview" className="preview-gif" />
+            <div
+              className="gif-placeholder"
+              onClick={() => setIsGifModalOpen(true)}
+            >
+              {gifUrl ? (
+                <img src={gifUrl} alt="Selected GIF" className="preview-gif" />
+              ) : (
+                <p>Click to add a GIF</p>
               )}
+            </div>
+            <div className="preview-content">
               <p className="preview-text">{text || "Write your message..."}</p>
-              <p className="preview-author">
-                {author || "Your name"}
-              </p>
+              <p className="preview-author">{author || "Your name"}</p>
             </div>
           </div>
         </div>
 
-        <div>
         {/* Contribution Form */}
         <form className="contributor-form">
-        <h1 className="contributor-title">{card.title}</h1>
+          <h1 className="contributor-title">{card.title}</h1>
           <label>{card.message}</label>
           <textarea
             placeholder="Write your heartfelt message here..."
@@ -96,7 +144,7 @@ const ContributorPage = () => {
             onChange={(e) => setText(e.target.value)}
             className="contributor-textarea"
           ></textarea>
-          <label>sign with your name</label>
+          <label>Sign your name</label>
           <input
             type="text"
             placeholder="Your name"
@@ -104,24 +152,66 @@ const ContributorPage = () => {
             onChange={(e) => setAuthor(e.target.value)}
             className="contributor-input"
           />
-          <label>add a GIF for more fun</label>
-          <input
-            type="text"
-            placeholder="Enter GIF URL"
-            value={gifUrl}
-            onChange={(e) => setGifUrl(e.target.value)}
-            className="contributor-input"
-          />
           <button
             type="button"
             onClick={handleAddMessage}
             className="contributor-button"
           >
-            send your message
+            Send your message
           </button>
         </form>
-        </div>
       </div>
+
+{/* GIF Search Modal */}
+{isGifModalOpen && (
+  <div className="gif-modal">
+    <div className="gif-modal-overlay" onClick={() => setIsGifModalOpen(false)}></div>
+    <div className="gif-modal-content">
+      <button
+        className="close-modal-button"
+        onClick={() => setIsGifModalOpen(false)}
+      >
+        ×
+      </button>
+      <h2 className="gif-modal-title">Search for a GIF</h2>
+      <div className="gif-search-section">
+        <input
+          type="text"
+          placeholder="Type to search for GIFs..."
+          value={gifSearch}
+          onChange={(e) => setGifSearch(e.target.value)}
+          className="gif-search-input"
+        />
+        <button
+          type="button"
+          onClick={handleGifSearch}
+          className="gif-search-button"
+        >
+          Search
+        </button>
+      </div>
+      <div className="gif-results">
+        {gifResults.length > 0 ? (
+          gifResults.map((gif) => (
+            <img
+              key={gif.id}
+              src={gif.images.fixed_height.url}
+              alt={gif.title}
+              className="gif-result"
+              onClick={() => {
+                setGifUrl(gif.images.fixed_height.url);
+                setIsGifModalOpen(false);
+              }}
+            />
+          ))
+        ) : (
+          <p className="gif-no-results">No GIFs found. Try a different keyword!</p>
+        )}
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
