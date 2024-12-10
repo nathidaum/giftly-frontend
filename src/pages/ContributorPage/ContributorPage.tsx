@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { getCardByShareableLink, addMessageToCard } from "../../api";
 import "./ContributorPage.css";
+import GifModal from "../../components/GifModal/GifModal";
+
 
 const GIPHY_API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
 
@@ -172,60 +174,18 @@ const ContributorPage = () => {
         </div>
       </div>
 
-      {/* GIF Search Modal */}
-      {isGifModalOpen && (
-        <div className="gif-modal">
-          <div
-            className="gif-modal-overlay"
-            onClick={() => setIsGifModalOpen(false)}
-          ></div>
-          <div className="gif-modal-content">
-            <button
-              className="close-modal-button"
-              onClick={() => setIsGifModalOpen(false)}
-            >
-              ×
-            </button>
-            <h2 className="gif-modal-title">Search for a GIF</h2>
-            <div className="gif-search-section">
-              <input
-                type="text"
-                placeholder="Type to search for GIFs..."
-                value={gifSearch}
-                onChange={(e) => setGifSearch(e.target.value)}
-                className="gif-search-input"
-              />
-              <button
-                type="button"
-                onClick={handleGifSearch}
-                className="gif-search-button"
-              >
-                Search
-              </button>
-            </div>
-            <div className="gif-results">
-              {gifResults.length > 0 ? (
-                gifResults.map((gif) => (
-                  <img
-                    key={gif.id}
-                    src={gif.images.fixed_height.url}
-                    alt={gif.title}
-                    className="gif-result"
-                    onClick={() => {
-                      setGifUrl(gif.images.fixed_height.url);
-                      setIsGifModalOpen(false);
-                    }}
-                  />
-                ))
-              ) : (
-                <p className="gif-no-results">
-                  No GIFs found. Try a different keyword!
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      <GifModal
+        isOpen={isGifModalOpen}
+        onClose={() => setIsGifModalOpen(false)}
+        onGifSelect={(url) => {
+          setGifUrl(url);
+          setIsGifModalOpen(false);
+        }}
+        searchGifs={debouncedGifSearch}
+        gifResults={gifResults}
+        gifSearch={gifSearch}
+        setGifSearch={setGifSearch}
+      />
     </div>
   );
 };
