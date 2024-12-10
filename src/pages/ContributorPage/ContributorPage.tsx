@@ -40,7 +40,7 @@ const ContributorPage = () => {
       return;
     }
 
-    const messageData = { author, text, gifUrl: gifUrl || null };
+    const messageData = { author, text, gifUrl: gifUrl || undefined };
 
     try {
       await addMessageToCard(shareableLink!, messageData);
@@ -79,7 +79,7 @@ const ContributorPage = () => {
               )}
               <p className="preview-text">{text || "Write your message..."}</p>
               <p className="preview-author">
-                {author || "Your name will appear here"}
+                {author || "Your name"}
               </p>
             </div>
           </div>
