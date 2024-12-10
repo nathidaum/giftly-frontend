@@ -1,0 +1,135 @@
+.card-details-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #dfe6ea, #e9d6dd, #ffffff);
+    animation: gradient-animation 20s ease infinite;
+  }
+  
+  .card-details-title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .card-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  /* Card Preview */
+  .detailed-card-preview {
+    width: 300px;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transform-origin: left;
+    transition: transform 0.5s ease;
+  }
+  
+  .card-preview.open {
+    transform: rotateY(-160deg);
+  }
+  
+  .card-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    backface-visibility: hidden;
+    padding: 20px;
+    transform: rotateY(180deg);
+  }
+  
+  /* Messages Section */
+  .card-messages {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 80%;
+    margin-top: 20px;
+  }
+  
+  .card-message {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .message-gif {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .message-text {
+    font-size: 1rem;
+    margin: 10px 0;
+  }
+  
+  .message-author {
+    font-size: 0.9rem;
+    text-align: right;
+    color: #666;
+  }
+  
+  /* Actions */
+  .card-actions {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .card-action-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .share-button {
+    padding: 1em;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: black;
+    border-radius: 2em;
+  }
+  
+  .share-button:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .publish-button {
+    padding: 1em;
+    background-color: rgba(10, 10, 10, 0.5);
+    color: white;
+    border-radius: 2em;
+  }
+
+  .publish-button:hover {
+    background-color: rgba(10, 10, 10, 0.3);
+  }
+  
+  .no-messages {
+    font-size: 1rem;
+    color: #666;
+  }
