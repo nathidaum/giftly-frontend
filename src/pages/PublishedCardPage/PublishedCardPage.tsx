@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getCardById } from "../../api/index"; // Assuming this function exists
 import templates from "../../data/templates.json";
 import "./PublishedCardPage.css";
+import FinalCard from "../../components/FinalCard";
 
 const PublishedCardPage = () => {
   const { cardId } = useParams<{ cardId: string }>();
@@ -26,7 +27,9 @@ const PublishedCardPage = () => {
           return;
         }
         // Map the template details
-        const template = templates.find((tpl) => tpl.id === fetchedCard.templateId);
+        const template = templates.find(
+          (tpl) => tpl.id === fetchedCard.templateId
+        );
         setCard({ ...fetchedCard, template });
       } catch (error) {
         console.error("Error fetching card:", error);
@@ -68,60 +71,18 @@ const PublishedCardPage = () => {
   if (!card) {
     return <div className="error">Published card not found!</div>;
   }
-
   return (
     <div className="published-card-page">
-      <h1 className="published-card-title">{card.title}</h1>
-      <div className="published-card-container">
-        {/* Carousel */}
-        <div className="card-carousel">
-          <button
-            className="carousel-arrow left-arrow"
-            onClick={handlePreviousSlide}
-          >
-            ◀
-          </button>
-          <div className="carousel-slide">
-            {isCoverSlide ? (
-              <div
-                className="carousel-cover"
-                style={{ backgroundImage: `url(${card.template?.image})` }}
-              ></div>
-            ) : (
-              <div className="carousel-message">
-                {card.messages[currentSlide - 1]?.gifUrl && (
-                  <img
-                    src={card.messages[currentSlide - 1].gifUrl}
-                    alt="GIF"
-                    className="carousel-gif"
-                  />
-                )}
-                <p className="carousel-text">
-                  {card.messages[currentSlide - 1]?.text}
-                </p>
-                <p className="carousel-author">
-                  - {card.messages[currentSlide - 1]?.author}
-                </p>
-              </div>
-            )}
-          </div>
-          <button
-            className="carousel-arrow right-arrow"
-            onClick={handleNextSlide}
-          >
-            ▶
-          </button>
-        </div>
-
-        {/* Actions */}
-        <div className="card-actions">
-          <button
-            onClick={handleShareCard}
-            className="card-action-button share-button"
-          >
-            Share this card with the recipient
-          </button>
-        </div>
+       <FinalCard
+          gifUrl={isCoverSlide ? undefined : card.messages[currentSlide - 1]?.gifUrl}
+          text={isCoverSlide ? "" : card.messages[currentSlide - 1]?.text}
+          author={isCoverSlide ? "" : card.messages[currentSlide - 1]?.author}
+          image={card.template?.image}
+          isCoverSlide={isCoverSlide}
+        />
+      <div className="card-actions">
+        <button className="card-action-button" onClick={handlePreviousSlide}>◀</button>
+        <button className="card-action-button" onClick={handleNextSlide}>▶</button>
       </div>
     </div>
   );
