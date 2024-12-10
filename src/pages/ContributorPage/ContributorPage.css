@@ -6,9 +6,9 @@
   align-items: center;
   text-align: center;
   height: 100vh;
-  background: linear-gradient(150deg, #b3bafc, #2d3043, #323232);
+  background: linear-gradient(150deg, #323335, #3d3f4d, #232323);
   background-size: 400% 400%;
-  animation: gradient-animation 20s ease infinite;
+  animation: gradient-animation 10s ease infinite;
 }
 
 @keyframes gradient-animation {

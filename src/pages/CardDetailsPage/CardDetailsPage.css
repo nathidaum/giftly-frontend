@@ -5,13 +5,26 @@
   align-items: center;
   text-align: center;
   height: 100vh;
-  background: linear-gradient(135deg, #dfe6ea, #e9d6dd, #ffffff);
+  background: linear-gradient(150deg, #323335, #3d3f4d, #333);
+  background-size: 400% 400%;
   animation: gradient-animation 20s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .card-details-title {
   font-size: 2.5rem;
-  color: #333;
+  color: white;
   margin-bottom: 10px;
 }
 
@@ -34,24 +47,24 @@
   background: none;
   border: none;
   font-size: 2rem;
-  color: #333;
+  color: #57585f;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .carousel-arrow:hover {
-  color: #555;
+  color: #7c7f8c;
   transform: scale(1.1);
 }
 
 .carousel-slide {
   width: 400px;
-  height: 600px;
+  height: 550px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -72,7 +85,7 @@
   align-items: flex-start;
   padding: 20px; 
   height: 100%;
-  color: #333;
+  color: white;
 }
 
 .carousel-gif {
