@@ -1,17 +1,31 @@
-/* Content Styling */
-.homepage-content {
-  z-index: 2;
+.homepage {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #b3e5fc, #f8bbd0, #ffffff);
+  background-size: 400% 400%;
+  animation: gradient-animation 10s ease infinite;
 }
 
 .homepage-title {
   font-size: 3rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 1rem;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.homepage-content {
+  z-index: 2;
 }
 
 .homepage-description {
   font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(0, 0, 0, 0.4);
   margin-bottom: 2rem;
   padding: 0 20px;
   max-width: 50vw;
@@ -52,8 +66,8 @@
   height: 300px;
   border-radius: 16px;
   background-size: cover;
-  background-repeat: no-repeat; 
-  background-position: center; 
+  background-repeat: no-repeat;
+  background-position: center;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   animation-duration: 5s ease-in-out infinite;
   transition: transform 0.3s ease;
