@@ -1,8 +1,17 @@
 .card-details-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 20px;
+}
+
+.card-details-page p {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.5);
+  width: 50vw;
+  margin: auto; 
+  padding-bottom: 20px;
 }
 
 /* Carousel */
@@ -53,7 +62,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 20px; 
+  padding: 20px;
   height: 100%;
   color: white;
 }
@@ -69,7 +78,7 @@
   font-size: 1rem;
   margin-bottom: 10px;
   word-wrap: break-word;
-  text-align:justify;
+  text-align: justify;
 }
 
 .carousel-author {

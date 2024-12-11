@@ -65,7 +65,7 @@ const PublishedCardPage = () => {
   const isCoverSlide = currentSlide === 0;
 
   // button actions
-  const handleShareCard = () => {
+  const handleShareFinalCard = () => {
     const recipientLink = `${window.location.origin}/cards/published/${card.id}`;
     navigator.clipboard.writeText(recipientLink);
     alert("Recipient link copied to clipboard!");
@@ -117,7 +117,7 @@ const PublishedCardPage = () => {
             <IconSend
               style={{ width: "70%", height: "70%" }}
               stroke={1.5}
-              onClick={handleShareCard}
+              onClick={handleShareFinalCard}
             />
           </ActionIcon>
           <ActionIcon

@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { ActionIcon } from "@mantine/core";
+import { Button } from "@mantine/core";
+import {
+  IconArrowRight,
+  IconChevronLeft,
+  IconChevronRight,
+  IconShare,
+} from "@tabler/icons-react";
 import { getCardById, publishCard } from "../../api/index"; // Import from api/index.ts
 import templates from "../../data/templates.json";
 import "./CardDetailsPage.css";
@@ -21,7 +29,9 @@ const CardDetailsPage = () => {
       try {
         const fetchedCard = await getCardById(id);
         // Map the template details
-        const template = templates.find((tpl) => tpl.id === fetchedCard.templateId);
+        const template = templates.find(
+          (tpl) => tpl.id === fetchedCard.templateId
+        );
         setCard({ ...fetchedCard, template });
       } catch (error) {
         console.error("Error fetching card:", error);
@@ -78,15 +88,44 @@ const CardDetailsPage = () => {
   return (
     <div className="card-details-page">
       <h1 className="title-center">{card.title}</h1>
+      <p>You created this card. Now it's time to get others to contribute! Click on the button below to share the card with them. Once you've collected all messages, click on the publish button to see and share the final result with the recipient.</p>
       <div className="card-details-container">
+        {/* Actions */}
+        <div className="card-actions">
+          <Button
+            radius="xl"
+            onClick={handleShareCard}
+            color="#333"
+            leftSection={<IconShare size={14} />}
+          >
+            Share with contributors
+          </Button>
+          <Button
+            radius="xl"
+            onClick={handlePublishCard}
+            color="#333"
+            rightSection={<IconArrowRight size={14} />}
+          >
+            Finish and publish card
+          </Button>
+        </div>
+
         {/* Carousel */}
         <div className="card-carousel">
-          <button
-            className="carousel-arrow left-arrow"
-            onClick={handlePreviousSlide}
+          <ActionIcon
+            variant="filled"
+            color="rgba(82, 82, 82, 1)"
+            size="xl"
+            radius="xl"
+            aria-label="Settings"
           >
-            ◀
-          </button>
+            <IconChevronLeft
+              style={{ width: "70%", height: "70%" }}
+              stroke={1.5}
+              onClick={handlePreviousSlide}
+            />
+          </ActionIcon>
+
           <div className="carousel-slide">
             {isCoverSlide ? (
               <div
@@ -111,28 +150,19 @@ const CardDetailsPage = () => {
               </div>
             )}
           </div>
-          <button
-            className="carousel-arrow right-arrow"
-            onClick={handleNextSlide}
+          <ActionIcon
+            variant="filled"
+            color="rgba(82, 82, 82, 1)"
+            size="xl"
+            radius="xl"
+            aria-label="Settings"
           >
-            ▶
-          </button>
-        </div>
-
-        {/* Actions */}
-        <div className="card-actions">
-          <button
-            onClick={handleShareCard}
-            className="card-action-button share-button"
-          >
-            Share card with others
-          </button>
-          <button
-            onClick={handlePublishCard}
-            className="card-action-button publish-button"
-          >
-            Finish and publish card
-          </button>
+            <IconChevronRight
+              style={{ width: "70%", height: "70%" }}
+              stroke={1.5}
+              onClick={handleNextSlide}
+            />
+          </ActionIcon>
         </div>
       </div>
     </div>
