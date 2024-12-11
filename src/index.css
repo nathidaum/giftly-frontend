@@ -35,6 +35,28 @@ body {
   }
 }
 
+.app-container {
+  position: relative;
+  padding: 20px; /* Add padding to ensure the logo is not too close to the edges */
+}
+
+.logo-link {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10; /* Ensure the logo is above all other content */
+  text-decoration: none;
+}
+
+.app-logo {
+  width: 100px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.app-logo:hover {
+  transform: scale(1.05);
+}
+
 .title {
   margin: 1rem 0;
   font-size: 2rem;
