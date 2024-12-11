@@ -90,7 +90,7 @@
   color: rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 2550, 0.1);
   border-radius: 20px;
-  cursor: text;
+  cursor: pointer;
 }
 
 .preview-gif {

@@ -1,5 +1,5 @@
-// GifModal.tsx
-import React, { useState } from "react";
+import React from "react";
+import { CloseButton } from '@mantine/core';
 import "./GifModal.css";
 
 interface GifModalProps {
@@ -27,9 +27,7 @@ const GifModal: React.FC<GifModalProps> = ({
     <div className="gif-modal">
       <div className="gif-modal-overlay" onClick={onClose}></div>
       <div className="gif-modal-content">
-        <button className="close-modal-button" onClick={onClose}>
-          ×
-        </button>
+        <CloseButton className="close-modal-button" radius={50} onClick={onClose}/>
         <h2 className="gif-modal-title">Search for a GIF</h2>
         <div className="gif-search-section">
           <input
@@ -48,19 +46,15 @@ const GifModal: React.FC<GifModalProps> = ({
           </button>
         </div>
         <div className="gif-results">
-          {gifResults.length > 0 ? (
-            gifResults.map((gif) => (
-              <img
-                key={gif.id}
-                src={gif.images.fixed_height.url}
-                alt="GIF"
-                className="gif-result"
-                onClick={() => onGifSelect(gif.images.fixed_height.url)}
-              />
-            ))
-          ) : (
-            <p className="gif-no-results">No GIFs found. Try a different keyword!</p>
-          )}
+          {gifResults.map((gif) => (
+            <img
+              key={gif.id}
+              src={gif.images.fixed_height.url}
+              alt="GIF"
+              className="gif-result"
+              onClick={() => onGifSelect(gif.images.fixed_height.url)}
+            />
+          ))}
         </div>
       </div>
     </div>
