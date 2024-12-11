@@ -12,7 +12,7 @@ const dampen = 40;
 const CardWrapper = styled(motion.div)`
   width: 500px;
   height: 700px;
-  border-radius: 16px;
+  border-radius: 15px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px) brightness(1.2);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
@@ -34,7 +34,7 @@ const CardContent = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -70,26 +70,27 @@ const CoverImage = styled.div`
 `;
 
 const GIFImage = styled.img`
-  padding: 20px;
+  margin-top: 30px;
   width: 90%;
-  height: 35%;
+  height: 40%;
   margin-bottom: 10px;
-  border-radius: 30px;
+  border-radius: 15px;
 `;
 
 const TextContent = styled.div`
   width: 90%;
-  justify-content: flex-start;
-  align-items: flex-start;
   text-align: left;
+  padding-bottom: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const MessageText = styled.p`
   font-size: 1.2rem;
   color: white;
   margin-bottom: 10px;
-  justify-content: flex-start;
-  align-items: flex-start;
 `;
 
 const AuthorText = styled.p`
@@ -98,13 +99,31 @@ const AuthorText = styled.p`
   font-style: italic;
 `;
 
+const MessageCounter = styled.p`
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+`;
+
 const FinalCard: React.FC<{
   gifUrl?: string;
   text?: string;
   author?: string;
   image?: string;
   isCoverSlide: boolean;
-}> = ({ gifUrl, text, author, image, isCoverSlide }) => {
+  currentMessageIndex?: number;
+  totalMessages?: number;
+}> = ({
+  gifUrl,
+  text,
+  author,
+  image,
+  isCoverSlide,
+  currentMessageIndex = 1,
+  totalMessages = 1,
+}) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const mouseX = useMotionValue(window.innerWidth / 2);
@@ -150,7 +169,12 @@ const FinalCard: React.FC<{
         ) : null}
         <TextContent>
           <MessageText>{text}</MessageText>
-          <AuthorText>{author}</AuthorText>
+          <div>
+            <AuthorText>{author}</AuthorText>
+            <MessageCounter>
+              {currentMessageIndex} / {totalMessages}
+            </MessageCounter>
+          </div>
         </TextContent>
       </CardContent>
     </CardWrapper>

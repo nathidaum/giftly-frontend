@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getCardById } from "../../api/index"; // Assuming this function exists
+import { getCardById } from "../../api/index";
+import { ActionIcon } from "@mantine/core";
+import {
+  IconChevronLeft,
+  IconChevronRight,
+  IconSend,
+  IconDownload,
+} from "@tabler/icons-react";
 import templates from "../../data/templates.json";
 import "./PublishedCardPage.css";
 import FinalCard from "../../components/FinalCard";
@@ -73,17 +80,73 @@ const PublishedCardPage = () => {
   }
   return (
     <div className="published-card-page">
-       <FinalCard
-          gifUrl={isCoverSlide ? undefined : card.messages[currentSlide - 1]?.gifUrl}
+      <ActionIcon
+        variant="filled"
+        color="rgba(82, 82, 82, 1)"
+        size="xl"
+        radius="xl"
+        aria-label="Settings"
+      >
+        <IconChevronLeft
+          style={{ width: "70%", height: "70%" }}
+          stroke={1.5}
+          onClick={handlePreviousSlide}
+        />
+      </ActionIcon>
+
+      <div className="final-card-with-icons">
+        <FinalCard
+          gifUrl={
+            isCoverSlide ? undefined : card.messages[currentSlide - 1]?.gifUrl
+          }
           text={isCoverSlide ? "" : card.messages[currentSlide - 1]?.text}
           author={isCoverSlide ? "" : card.messages[currentSlide - 1]?.author}
           image={card.template?.image}
           isCoverSlide={isCoverSlide}
+          currentMessageIndex={isCoverSlide ? 0 : currentSlide}
+          totalMessages={card.messages.length}
         />
-      <div className="card-actions">
-        <button className="card-action-button" onClick={handlePreviousSlide}>◀</button>
-        <button className="card-action-button" onClick={handleNextSlide}>▶</button>
+        <div className="actions">
+          <ActionIcon
+            variant="filled"
+            color="rgba(82, 82, 82, 1)"
+            size="xl"
+            radius="xl"
+            aria-label="Settings"
+          >
+            <IconSend
+              style={{ width: "70%", height: "70%" }}
+              stroke={1.5}
+              onClick={handleShareCard}
+            />
+          </ActionIcon>
+          <ActionIcon
+            variant="filled"
+            color="rgba(82, 82, 82, 1)"
+            size="xl"
+            radius="xl"
+            aria-label="Settings"
+          >
+            <IconDownload
+              style={{ width: "70%", height: "70%" }}
+              stroke={1.5}
+            />
+          </ActionIcon>
+        </div>
       </div>
+      <ActionIcon
+        variant="filled"
+        color="rgba(82, 82, 82, 1)"
+        size="xl"
+        radius="xl"
+        aria-label="Settings"
+      >
+        <IconChevronRight
+          style={{ width: "70%", height: "70%" }}
+          stroke={1.5}
+          onClick={handleNextSlide}
+        />
+      </ActionIcon>
     </div>
   );
 };
