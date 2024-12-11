@@ -1,5 +1,13 @@
-const NotFoundPage = () => {
-
+.not-found-title {
+  font-size: 15rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #b3e5fc, #f8bbd0, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shiny-text 2s linear infinite;
 }
 
-export default NotFoundPage;
+.not-found-subtitle {
+  font-size: 1.5rem;
+  color: grey;
+}
