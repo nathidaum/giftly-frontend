@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import Confetti from "react-confetti";
 import axios from "axios";
 import { getCardByShareableLink, addMessageToCard } from "../../api";
 import "./ContributorPage.css";
 import GifModal from "../../components/GifModal/GifModal";
-
 
 const GIPHY_API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
 
@@ -27,8 +27,8 @@ const ContributorPage = () => {
   const [text, setText] = useState("");
   const [gifUrl, setGifUrl] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-
-  const textAreaRef = useRef<HTMLTextAreaElement>(null); // Create a reference for the textarea
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   // Giphy-related state
   const [gifSearch, setGifSearch] = useState("");
@@ -56,7 +56,6 @@ const ContributorPage = () => {
     fetchCard();
   }, [shareableLink, navigate]);
 
-  // Focus the textarea whenever text is empty
   useEffect(() => {
     if (textAreaRef.current && text === "") {
       textAreaRef.current.focus();
@@ -74,7 +73,7 @@ const ContributorPage = () => {
         params: {
           api_key: GIPHY_API_KEY,
           q: gifSearch,
-          limit: 10, // Fetch 10 results
+          limit: 10,
         },
       });
       setGifResults(response.data.data);
@@ -84,7 +83,6 @@ const ContributorPage = () => {
     }
   };
 
-  // Debounced search
   const debouncedGifSearch = debounce(() => {
     handleGifSearch();
   }, 500);
@@ -99,10 +97,7 @@ const ContributorPage = () => {
 
     try {
       await addMessageToCard(shareableLink!, messageData);
-      alert("Your message has been added!");
-      setAuthor("");
-      setText("");
-      setGifUrl("");
+      setIsSubmitted(true);
     } catch (error) {
       console.error("Error adding message:", error);
       alert("Failed to add your message. Please try again.");
@@ -119,60 +114,84 @@ const ContributorPage = () => {
 
   return (
     <div className="contributor-page">
-      <div className="contributor-info">
-        <h1> {card.title}</h1>
-        <p> {card.message}</p>
-
-        <button
-          type="button"
-          onClick={handleAddMessage}
-          className={`contributor-button ${!text || !author ? "disabled" : ""}`}
-          disabled={!text || !author} // Disable button if inputs are empty
-        >
-          Send your message
-        </button>
-      </div>
-      <div className="contributor-container">
-        {/* Card Preview */}
-        <div className="contributor-card-preview">
-          <div
-            className="contributor-card-preview-template"
-            style={{
-              backgroundImage: `url(${card.template?.image || ""})`,
-            }}
-          >
-            <div
-              className="gif-placeholder"
-              onClick={() => setIsGifModalOpen(true)}
+      <>
+        {isSubmitted ? (
+          <div className="contributor-info">
+            <Confetti
+              numberOfPieces={200}
+              colors={["#b3e5fc", "#f8bbd0", "#ffffff", "#4169e1"]}
+              recycle={false}
+              confettiSource={{
+                x: window.innerWidth / 2 + 150,
+                y: window.innerHeight / 2 - 150,
+                w: 200,
+                h: 200,
+              }}
+            />
+            <h1>Thank you for your message! 🎉</h1>
+          </div>
+        ) : (
+          <div className="contributor-info">
+            <h1>{card.title}</h1>
+            <p>{card.message}</p>
+            <button
+              type="button"
+              onClick={handleAddMessage}
+              className={`contributor-button ${
+                !text || !author ? "disabled" : ""
+              }`}
+              disabled={!text || !author}
             >
-              {gifUrl ? (
-                <img src={gifUrl} alt="Selected GIF" className="preview-gif" />
-              ) : (
-                <div className="add-gif">
-                  <p>Add a GIF 📸 </p>
-                </div>
-              )}
-            </div>
-            <div className="preview-content">
-              <textarea
-                ref={textAreaRef}
-                placeholder="Write some nice words here..."
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                className="contributor-textarea"
-                maxLength={500}
-              ></textarea>
-              <input
-                type="text"
-                placeholder=" - Your name"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
-                className="contributor-input"
-              />
+              Send your message
+            </button>
+          </div>
+        )}
+
+        <div className="contributor-container">
+          <div className="contributor-card-preview">
+            <div
+              className="contributor-card-preview-template"
+              style={{
+                backgroundImage: `url(${card.template?.image || ""})`,
+              }}
+            >
+              <div
+                className="gif-placeholder"
+                onClick={() => setIsGifModalOpen(true)}
+              >
+                {gifUrl ? (
+                  <img
+                    src={gifUrl}
+                    alt="Selected GIF"
+                    className="preview-gif"
+                  />
+                ) : (
+                  <div className="add-gif">
+                    <p>Add a GIF 📸 </p>
+                  </div>
+                )}
+              </div>
+              <div className="preview-content">
+                <textarea
+                  ref={textAreaRef}
+                  placeholder="Write some nice words here..."
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  className="contributor-textarea"
+                  maxLength={500}
+                ></textarea>
+                <input
+                  type="text"
+                  placeholder=" - Your name"
+                  value={author}
+                  onChange={(e) => setAuthor(e.target.value)}
+                  className="contributor-input"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </>
 
       <GifModal
         isOpen={isGifModalOpen}
