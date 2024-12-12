@@ -2,7 +2,9 @@ import React, { useRef } from "react";
 import styled from "@emotion/styled";
 import {
   motion,
+  motionValue,
   useMotionValue,
+  useMotionValueEvent,
   useTransform,
   useMotionTemplate,
 } from "framer-motion";
@@ -128,27 +130,41 @@ const FinalCard: React.FC<{
 
   const mouseX = useMotionValue(window.innerWidth / 2);
   const mouseY = useMotionValue(window.innerHeight / 2);
-
   const rotateX = useTransform(mouseY, (newMouseY) => {
     if (!cardRef.current) return 0;
     const rect = cardRef.current.getBoundingClientRect();
     return -((newMouseY - rect.top - rect.height / 2) / dampen);
   });
-
+  
   const rotateY = useTransform(mouseX, (newMouseX) => {
     if (!cardRef.current) return 0;
     const rect = cardRef.current.getBoundingClientRect();
     return (newMouseX - rect.left - rect.width / 2) / dampen;
   });
-
-  const diagonalMovement = useTransform([rotateX, rotateY], ([x, y]) => x + y);
-  const sheenPosition = useTransform(diagonalMovement, [-5, 5], [-100, 200]);
+  
+  // Create a custom diagonalMotionValue
+  const diagonalMotionValue = motionValue(0);
+  
+  // Sync rotateX and rotateY changes to the diagonalMotionValue
+  useMotionValueEvent(rotateX, "change", (x) => {
+    const y = rotateY.get(); // Get the current value of rotateY
+    diagonalMotionValue.set(x + y); // Set the combined value
+  });
+  
+  useMotionValueEvent(rotateY, "change", (y) => {
+    const x = rotateX.get(); // Get the current value of rotateX
+    diagonalMotionValue.set(x + y); // Set the combined value
+  });
+  
+  // Use the diagonalMotionValue in transforms
+  const sheenPosition = useTransform(diagonalMotionValue, [-5, 5], [-100, 200]);
   const sheenOpacity = useTransform(
     sheenPosition,
     [-100, 50, 200],
     [0, 0.1, 0]
   );
   const sheenGradient = useMotionTemplate`linear-gradient(55deg, transparent, rgba(255, 255, 255, ${sheenOpacity}) ${sheenPosition}%, transparent)`;
+  
 
   return (
     <CardWrapper
