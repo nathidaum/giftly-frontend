@@ -1,0 +1,39 @@
+.mobile-carousel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden; /* Prevent content overflow */
+    padding: 40px 0 70px; /* Space around carousel */
+  }
+  
+  .mobile-carousel-templates {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Space between templates */
+    transition: transform 0.5s ease; /* Smooth scrolling */
+  }
+  
+  .mobile-template-option {
+    flex-shrink: 0; /* Prevent shrinking */
+    width: 70px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    opacity: 0.6; /* Dim smaller templates */
+    transform: scale(0.8); /* Slightly smaller */
+    transition: transform 0.7s ease, opacity 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .mobile-template-option.mobile-selected {
+    width: 110px; /* Size for the selected template */
+    height: 150px;
+    align-self: center;
+    opacity: 1; /* Fully visible */
+    transform: scale(1.2); /* Larger size for the center */
+  }
+  

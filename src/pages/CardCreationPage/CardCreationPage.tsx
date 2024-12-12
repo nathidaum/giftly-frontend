@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TemplateSelector from "../../components/TemplateSelector/TemplateSelector";
+import MobileTemplateSelector from "../../components/MobileTemplateSelector/MobileTemplateSelector";
 import templates from "../../data/templates.json";
 import "./CardCreationPage.css";
 import { createCard } from "../../api";
@@ -10,6 +11,7 @@ const CardCreationPage = () => {
   const [message, setMessage] = useState("");
   const [selectedTemplate, setSelectedTemplate] = useState(templates[0]?.id);
   const navigate = useNavigate();
+  const isMobile = window.innerWidth <= 768;
 
   const handleCreateCard = async () => {
     if (!title || !message) {
@@ -43,7 +45,12 @@ const CardCreationPage = () => {
           <h1 className="card-creation-title">
             Create a card & get others to write something nice! 📝
           </h1>
-
+          {isMobile && (
+            <MobileTemplateSelector
+              selectedTemplate={selectedTemplate}
+              setSelectedTemplate={setSelectedTemplate}
+            />
+          )}
           <input
             type="text"
             placeholder="Celebrating Alex!"
@@ -71,12 +78,15 @@ const CardCreationPage = () => {
             Create card & get link to share
           </button>
         </form>
-        <div className="desktop-template-selector">
-          <TemplateSelector
-            selectedTemplate={selectedTemplate}
-            setSelectedTemplate={setSelectedTemplate}
-          />
-        </div>
+
+        {!isMobile && (
+          <div className="desktop-template-selector">
+            <TemplateSelector
+              selectedTemplate={selectedTemplate}
+              setSelectedTemplate={setSelectedTemplate}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
