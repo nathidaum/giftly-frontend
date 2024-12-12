@@ -34,11 +34,11 @@
   text-align: left;
   margin: 5px 0 15px;
   font-size: 0.8em;
-} 
+}
 
 .card-creation-input,
 .card-creation-textarea {
-  margin-top: 20px; 
+  margin-top: 20px;
   padding-bottom: 15px;
   border: 1px solid transparent;
   border-bottom: 1px solid grey;
@@ -59,7 +59,7 @@
 }
 
 .card-creation-textarea {
-  height: fit-content; 
+  height: fit-content;
   resize: none;
 }
 
@@ -84,7 +84,7 @@
   opacity: 0.1;
 }
 
-/* button */ 
+/* button */
 .create-button {
   padding: 10px 20px;
   margin: 20px 0px;
@@ -100,75 +100,7 @@
 .create-button:hover {
   background-color: rgba(255, 255, 255, 0.4);
 }
-.create-button:disabled{
+.create-button:disabled {
   background-color: rgba(255, 255, 255, 0.1);
   cursor: not-allowed;
-}
-
-/* right side: preview & template selection */
-
-.card-preview {
-  flex: 1;
-  flex-direction: column;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.card-preview-template {
-  padding: 10px;
-  width: 300px;
-  height: 450px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  background-position: center;
-  border-radius: 16px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.carousel {
-  display: flex;
-  align-items: center;
-  margin-top: 30px;
-}
-
-.carousel-arrow {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #57585f;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.carousel-arrow:disabled {
-  color: #323335;
-  cursor: not-allowed;
-}
-
-.carousel-templates {
-  display: flex;
-  gap: 10px;
-  padding: 0 10px;
-}
-
-.template-option {
-  width: 60px;
-  height: 90px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.template-option:hover {
-  transform: scale(1.1);
-}
-
-.template-option.selected {
-  border-color: #6e567b;
 }
