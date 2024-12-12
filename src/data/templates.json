@@ -2,57 +2,41 @@
   {
     "id": 1,
     "category": "Birthday",
-    "title": "It's gonna be lit",
-    "image": "/public/birthday1.png",
-    "fontStyle": "Comic Sans MS"
+    "image": "/birthday1.png"
   },
   {
     "id": 2,
     "category": "Birthday",
-    "title": "Confetti wishes",
-    "image": "/public/birthday2.png",
-    "fontStyle": "Times New Roman"
+    "image": "/birthday2.png"
   },
   {
     "id": 3,
     "category": "Birthday",
-    "title": "Sprinkling you with wishes",
-    "image": "/public/birthday3.png",
-    "fontStyle": "Arial"
+    "image": "/birthday3.png"
   },
   {
     "id": 4,
     "category": "Farewell",
-    "title": "Hope our paths croissant again",
-    "image": "/public/farewell1.png",
-    "fontStyle": "Georgia"
+    "image": "/farewell1.png"
   },
   {
     "id": 5,
     "category": "Farewell",
-    "title": "Donut want to say goodbye",
-    "image": "/public/farewell2.png",
-    "fontStyle": "Verdana"
+    "image": "/farewell2.png"
   },
   {
     "id": 6,
     "category": "Farewell",
-    "title": "Waddle I do without you?",
-    "image": "/public/farewell3.png",
-    "fontStyle": "Courier New"
+    "image": "/farewell3.png"
   },
   {
     "id": 7,
     "category": "Thank You",
-    "title": "Simple Thanks",
-    "image": "/public/thankyou1.png",
-    "fontStyle": "Helvetica"
+    "image": "/thankyou1.png"
   },
   {
     "id": 8,
     "category": "Thank You",
-    "title": "Big Thank You!",
-    "image": "/public/thankyou2.png",
-    "fontStyle": "Open Sans"
+    "image": "/thankyou2.png"
   }
 ]
