@@ -1,7 +1,6 @@
 .card-creation-container {
   display: flex;
   justify-content: flex-start;
-  gap: 20px;
   width: 100%;
   max-width: 1200px;
 }
@@ -13,7 +12,6 @@
   text-align: left;
 }
 
-/* left side: card creation form */
 .card-creation-form {
   padding-right: 50px;
   display: flex;
@@ -22,11 +20,7 @@
   flex: 1;
   width: 600px;
   height: 100%;
-  /* background-color: rgba(255, 255, 255, 0.1); */
   color: #333;
-  border-radius: 20px;
-  box-sizing: border-box;
-  /* box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); */
 }
 
 .card-creation-form label {
@@ -36,8 +30,7 @@
   font-size: 0.8em;
 }
 
-.card-creation-input,
-.card-creation-textarea {
+.card-creation-input {
   margin-top: 20px;
   padding-bottom: 15px;
   border: 1px solid transparent;
@@ -51,40 +44,12 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-creation-input:focus,
-.card-creation-textarea:focus {
+.card-creation-input:focus {
   outline: none;
   border-bottom: 1px solid white;
   box-shadow: 0 2px 6px black(255, 64, 129, 0.1);
 }
 
-.card-creation-textarea {
-  height: fit-content;
-  resize: none;
-}
-
-.card-creation-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  padding: 1em;
-  background-color: rgba(10, 10, 10, 0.5);
-  color: white;
-}
-
-.card-creation-button:hover {
-  background-color: rgba(10, 10, 10, 0.3);
-}
-
-.disabled-action-icon {
-  cursor: not-allowed;
-  opacity: 0.1;
-}
-
-/* button */
 .create-button {
   padding: 10px 20px;
   margin: 20px 0px;
@@ -103,4 +68,24 @@
 .create-button:disabled {
   background-color: rgba(255, 255, 255, 0.1);
   cursor: not-allowed;
+}
+
+@media (max-width: 767px) {
+  .card-creation-container {
+    flex-direction: column;
+    width: 100%;
+    max-width: 90vw;
+  }
+
+  .card-creation-form {
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+  }
+  .card-creation-title {
+    font-size: 1.5em;
+  }
+  .desktop-template-selector {
+    display: none;
+  }
 }

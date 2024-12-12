@@ -41,7 +41,7 @@ const CardCreationPage = () => {
         {/* Card Details Form */}
         <form className="card-creation-form">
           <h1 className="card-creation-title">
-            Create a card & get others to write something nice! 🎉
+            Create a card & get others to write something nice! 📝
           </h1>
 
           <input
@@ -54,12 +54,12 @@ const CardCreationPage = () => {
           />
           <label>Give your card a nice title.</label>
 
-          <textarea
+          <input
             placeholder="Let's all take some time to write some nice words."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="card-creation-textarea"
-          ></textarea>
+            className="card-creation-input"
+          ></input>
           <label>Formulate a message to let the contributors know.</label>
 
           <button
@@ -71,11 +71,12 @@ const CardCreationPage = () => {
             Create card & get link to share
           </button>
         </form>
-
-        <TemplateSelector
-          selectedTemplate={selectedTemplate}
-          setSelectedTemplate={setSelectedTemplate}
-        />
+        <div className="desktop-template-selector">
+          <TemplateSelector
+            selectedTemplate={selectedTemplate}
+            setSelectedTemplate={setSelectedTemplate}
+          />
+        </div>
       </div>
     </div>
   );
