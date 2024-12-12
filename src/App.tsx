@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import CardCreationPage from "./pages/CardCreationPage/CardCreationPage";
 import CardDetailsPage from "./pages/CardDetailsPage/CardDetailsPage";
 import ContributorPage from "./pages/ContributorPage/ContributorPage";

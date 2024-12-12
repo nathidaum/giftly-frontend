@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import templates from "../../data/templates.json";
 import { ActionIcon } from "@mantine/core";
