@@ -1,4 +1,4 @@
-.mobile-carousel {
+.carousel {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -8,7 +8,7 @@
     padding: 40px 0 70px; /* Space around carousel */
   }
   
-  .mobile-carousel-templates {
+  .carousel-templates {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,7 +16,7 @@
     transition: transform 0.5s ease; /* Smooth scrolling */
   }
   
-  .mobile-template-option {
+  .template-option {
     flex-shrink: 0; /* Prevent shrinking */
     width: 6em;
     height: 9em;
@@ -29,7 +29,7 @@
     cursor: pointer;
   }
   
-  .mobile-template-option.mobile-selected {
+  .template-option.selected {
     width: 60%; /* Size for the selected template */
     height: 12em;
     align-self: center;

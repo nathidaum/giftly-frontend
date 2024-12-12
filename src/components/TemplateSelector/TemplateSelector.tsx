@@ -45,15 +45,15 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   };
 
   return (
-    <div className="mobile-carousel">
-      <div className="mobile-carousel-templates">
+    <div className="carousel">
+      <div className="carousel-templates">
         {getVisibleTemplates().map((template, index) => {
           const isCenter = index === 1; // Center template
           return (
             <div
               key={template.id}
-              className={`mobile-template-option ${
-                isCenter ? "mobile-selected" : ""
+              className={`template-option ${
+                isCenter ? "selected" : ""
               }`}
               style={{ backgroundImage: `url(${template.image})` }}
               onClick={() =>
