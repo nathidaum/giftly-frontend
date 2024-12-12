@@ -18,8 +18,8 @@
   
   .mobile-template-option {
     flex-shrink: 0; /* Prevent shrinking */
-    width: 70px;
-    height: 100px;
+    width: 100px;
+    height: 150px;
     background-size: cover;
     background-position: center;
     border-radius: 8px;
@@ -30,8 +30,8 @@
   }
   
   .mobile-template-option.mobile-selected {
-    width: 110px; /* Size for the selected template */
-    height: 150px;
+    width: 120px; /* Size for the selected template */
+    height: 160px;
     align-self: center;
     opacity: 1; /* Fully visible */
     transform: scale(1.2); /* Larger size for the center */
