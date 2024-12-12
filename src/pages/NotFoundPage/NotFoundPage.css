@@ -1,3 +1,10 @@
+.not-found-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .not-found-title {
   font-size: 15rem;
   font-weight: bold;

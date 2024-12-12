@@ -36,7 +36,7 @@ const CardCreationPage = () => {
   };
 
   return (
-    <div>
+    <div className="card-creation-page">
       <div className="card-creation-container">
         {/* Card Details Form */}
         <form className="card-creation-form">
