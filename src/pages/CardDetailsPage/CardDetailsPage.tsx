@@ -87,15 +87,20 @@ const CardDetailsPage = () => {
 
   return (
     <div className="card-details-page">
-      <h1 className="title-center">{card.title}</h1>
-      <p>You created this card. Now it's time to get others to contribute! Click on the button below to share the card with them. Once you've collected all messages, click on the publish button to see and share the final result with the recipient.</p>
-      <div className="card-details-container">
-        {/* Actions */}
+      <div className="details-left">
+        <h1 className="title">{card.title}</h1>
+        <p className="insructions">
+          Time to get others to contribute! Click on the button below to share
+          the card with them. <br></br>
+          Once you've collected all messages, click on the publish button to see
+          and share the final result with the recipient.
+        </p>
         <div className="card-actions">
           <Button
+            mb="lg"
             radius="xl"
             onClick={handleShareCard}
-            color="#333"
+            color="rgba(255, 255, 255, 0.2)"
             leftSection={<IconShare size={14} />}
           >
             Share with contributors
@@ -103,44 +108,47 @@ const CardDetailsPage = () => {
           <Button
             radius="xl"
             onClick={handlePublishCard}
-            color="#333"
-            rightSection={<IconArrowRight size={14} />}
+            color="rgba(255, 255, 255, 0.2)"
+            leftSection={<IconArrowRight size={14} />}
           >
             Finish and publish card
           </Button>
         </div>
+      </div>
 
-        {/* Carousel */}
-        <div className="card-carousel">
-          <ActionIcon
-            variant="filled"
-            color="rgba(82, 82, 82, 1)"
-            size="xl"
-            radius="xl"
-            aria-label="Settings"
-          >
-            <IconChevronLeft
-              style={{ width: "70%", height: "70%" }}
-              stroke={1.5}
-              onClick={handlePreviousSlide}
-            />
-          </ActionIcon>
+      {/* Carousel */}
+      <div className="card-carousel">
+        <ActionIcon
+          variant="filled"
+          color="rgba(82, 82, 82, 1)"
+          size="xl"
+          radius="xl"
+          aria-label="Settings"
+          className="desktop-arrow"
+        >
+          <IconChevronLeft
+            style={{ width: "70%", height: "70%" }}
+            stroke={1.5}
+            onClick={handlePreviousSlide}
+          />
+        </ActionIcon>
 
-          <div className="carousel-slide">
-            {isCoverSlide ? (
-              <div
-                className="carousel-cover"
-                style={{ backgroundImage: `url(${card.template?.image})` }}
-              ></div>
-            ) : (
-              <div className="carousel-message">
-                {card.messages[currentSlide - 1]?.gifUrl && (
-                  <img
-                    src={card.messages[currentSlide - 1].gifUrl}
-                    alt="GIF"
-                    className="carousel-gif"
-                  />
-                )}
+        <div className="carousel-slide">
+          {isCoverSlide ? (
+            <div
+              className="carousel-cover"
+              style={{ backgroundImage: `url(${card.template?.image})` }}
+            ></div>
+          ) : (
+            <div className="carousel-message">
+              {card.messages[currentSlide - 1]?.gifUrl && (
+                <img
+                  src={card.messages[currentSlide - 1].gifUrl}
+                  alt="GIF"
+                  className="carousel-gif"
+                />
+              )}
+              <div className="gif-bottom">
                 <p className="carousel-text">
                   {card.messages[currentSlide - 1]?.text}
                 </p>
@@ -148,22 +156,53 @@ const CardDetailsPage = () => {
                   - {card.messages[currentSlide - 1]?.author}
                 </p>
               </div>
-            )}
-          </div>
-          <ActionIcon
-            variant="filled"
-            color="rgba(82, 82, 82, 1)"
-            size="xl"
-            radius="xl"
-            aria-label="Settings"
-          >
-            <IconChevronRight
-              style={{ width: "70%", height: "70%" }}
-              stroke={1.5}
-              onClick={handleNextSlide}
-            />
-          </ActionIcon>
+            </div>
+          )}
         </div>
+        <ActionIcon
+          variant="filled"
+          color="rgba(82, 82, 82, 1)"
+          size="xl"
+          radius="xl"
+          aria-label="Settings"
+          className="desktop-arrow"
+        >
+          <IconChevronRight
+            style={{ width: "70%", height: "70%" }}
+            stroke={1.5}
+            onClick={handleNextSlide}
+          />
+        </ActionIcon>
+      </div>
+      <div className="mobile-arrow-section">
+        <ActionIcon
+          variant="filled"
+          color="rgba(82, 82, 82, 1)"
+          size="lg"
+          radius="xl"
+          aria-label="Settings"
+          className="mobile-arrow"
+        >
+          <IconChevronLeft
+            style={{ width: "70%", height: "70%" }}
+            stroke={1.5}
+            onClick={handlePreviousSlide}
+          />
+        </ActionIcon>
+        <ActionIcon
+          variant="filled"
+          color="rgba(82, 82, 82, 1)"
+          size="lg"
+          radius="xl"
+          aria-label="Settings"
+          className="mobile-arrow"
+        >
+          <IconChevronRight
+            style={{ width: "70%", height: "70%" }}
+            stroke={1.5}
+            onClick={handleNextSlide}
+          />
+        </ActionIcon>
       </div>
     </div>
   );
