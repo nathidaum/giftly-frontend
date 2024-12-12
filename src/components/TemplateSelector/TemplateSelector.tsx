@@ -1,89 +1,69 @@
 import { useState } from "react";
 import templates from "../../data/templates.json";
-import { ActionIcon } from "@mantine/core";
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-import "./TemplateSelector.css"
+import "./TemplateSelector.css";
 
 interface TemplateSelectorProps {
-  selectedTemplate: number | null;
-  setSelectedTemplate: (id: number) => void;
+  selectedTemplate: number; // The ID of the currently selected template
+  setSelectedTemplate: (id: number) => void; // Function to update the selected template
 }
 
 const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   selectedTemplate,
   setSelectedTemplate,
 }) => {
-  const [visibleTemplates, setVisibleTemplates] = useState(
-    templates.slice(0, 4)
-  ); // Initially show 4 templates
-  const [startIndex, setStartIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0); // Index of the center template
 
-  const handleNextTemplates = () => {
-    const newIndex = startIndex + 4;
-    if (newIndex < templates.length) {
-      setVisibleTemplates(templates.slice(newIndex, newIndex + 4));
-      setStartIndex(newIndex);
-    }
+  // Helper function to get the visible templates (left, center, right)
+  const getVisibleTemplates = () => {
+    const totalTemplates = templates.length;
+    const prevIndex = (currentIndex - 1 + totalTemplates) % totalTemplates; // Wrap around for left
+    const nextIndex = (currentIndex + 1) % totalTemplates; // Wrap around for right
+
+    return [
+      templates[prevIndex],
+      templates[currentIndex],
+      templates[nextIndex],
+    ];
   };
 
-  const handlePrevTemplates = () => {
-    const newIndex = startIndex - 4;
-    if (newIndex >= 0) {
-      setVisibleTemplates(templates.slice(newIndex, newIndex + 4));
-      setStartIndex(newIndex);
+  // Handle template clicks
+  const handleTemplateClick = (clickedIndex: number) => {
+    if (
+      clickedIndex ===
+      (currentIndex - 1 + templates.length) % templates.length
+    ) {
+      // Clicked the left template
+      setCurrentIndex(
+        (prevIndex) => (prevIndex - 1 + templates.length) % templates.length
+      );
+    } else if (clickedIndex === (currentIndex + 1) % templates.length) {
+      // Clicked the right template
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % templates.length);
     }
+    // Update the selected template
+    setSelectedTemplate(templates[clickedIndex].id);
   };
 
   return (
-    <div className="card-preview">
-      <div
-        className="card-preview-template"
-        style={{
-          backgroundImage: `url(${
-            templates.find((template) => template.id === selectedTemplate)
-              ?.image
-          })`,
-        }}
-      ></div>
-
-      {/* Template Selector */}
-      <div className="carousel">
-        <ActionIcon
-          variant="filled"
-          color="rgba(82, 82, 82, 1)"
-          size="sm"
-          radius="xl"
-          aria-label="Settings"
-          className={startIndex === 0 ? "disabled-action-icon" : ""}
-          onClick={handlePrevTemplates}
-        >
-          <IconChevronLeft />
-        </ActionIcon>
-        <div className="carousel-templates">
-          {visibleTemplates.map((template) => (
+    <div className="mobile-carousel">
+      <div className="mobile-carousel-templates">
+        {getVisibleTemplates().map((template, index) => {
+          const isCenter = index === 1; // Center template
+          return (
             <div
               key={template.id}
-              className={`template-option ${
-                template.id === selectedTemplate ? "selected" : ""
+              className={`mobile-template-option ${
+                isCenter ? "mobile-selected" : ""
               }`}
               style={{ backgroundImage: `url(${template.image})` }}
-              onClick={() => setSelectedTemplate(template.id)}
+              onClick={() =>
+                handleTemplateClick(
+                  templates.findIndex((t) => t.id === template.id)
+                )
+              }
             ></div>
-          ))}
-        </div>
-        <ActionIcon
-          variant="filled"
-          color="rgba(82, 82, 82, 1)"
-          size="sm"
-          radius="xl"
-          aria-label="Settings"
-          className={
-            startIndex + 4 >= templates.length ? "disabled-action-icon" : ""
-          }
-          onClick={handleNextTemplates}
-        >
-          <IconChevronRight />
-        </ActionIcon>
+          );
+        })}
       </div>
     </div>
   );
