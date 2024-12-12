@@ -21,6 +21,10 @@
 
 .homepage-content {
   z-index: 2;
+  display:flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .homepage-description {
@@ -40,6 +44,7 @@
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .homepage-cta-button:hover {
@@ -126,5 +131,25 @@
   }
   100% {
     transform: translateY(0px) rotate(15deg);
+  }
+}
+
+
+@media (max-width: 767px) {
+  .homepage-title {
+    font-size: 2.2em;
+    padding: 0 2em;
+    line-height: 1.5em;
+  }
+
+  .homepage-description {
+    font-size: 1em;
+    padding: 0 2em;
+    max-width: 90vw;
+  }
+
+  .card-template {
+    width: 150px;
+    height: 225px;
   }
 }
