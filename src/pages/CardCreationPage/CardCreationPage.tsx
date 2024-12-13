@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import TemplateSelector from "../../components/TemplateSelector/TemplateSelector";
 import templates from "../../data/templates.json";
 import "./CardCreationPage.css";
@@ -27,7 +29,17 @@ const CardCreationPage = () => {
       const createdCard = await createCard(data);
       console.log("Card Created:", createdCard);
 
-      // Navigate to CardDetailsPage
+      toast("✨ Your card was successfully created!", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        draggablePercent: 0,
+        className: "custom-toast",
+        bodyClassName: "custom-toast-body",
+      });
       navigate(`/cards/${createdCard.id}`);
     } catch (error) {
       console.error("Error creating card:", error);
