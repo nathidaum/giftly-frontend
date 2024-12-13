@@ -8,7 +8,6 @@ interface TemplateSelectorProps {
 }
 
 const TemplateSelector: React.FC<TemplateSelectorProps> = ({
-  selectedTemplate,
   setSelectedTemplate,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0); // Index of the center template
