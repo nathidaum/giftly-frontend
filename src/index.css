@@ -9,7 +9,7 @@
 }
 
 body {
-  height: 100%; 
+  height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -69,5 +69,27 @@ body {
   margin: 1rem 0;
   font-size: 2rem;
   color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+
+/* Custom toast container */
+.custom-toast {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: black !important;
+  border-radius: 8px !important;
+  width: 80vw !important;
+  max-width: 300px !important;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Optional: Customize the body */
+.custom-toast-body {
+  font-size: 1em !important;
+  font-weight: 500;
   text-align: center;
 }

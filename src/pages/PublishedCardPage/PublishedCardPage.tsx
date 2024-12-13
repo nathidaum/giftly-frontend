@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { getCardById } from "../../api/index";
 import { ActionIcon } from "@mantine/core";
 import {
   IconChevronLeft,
   IconChevronRight,
-  IconSend
+  IconSend,
 } from "@tabler/icons-react";
 import templates from "../../data/templates.json";
 import "./PublishedCardPage.css";
@@ -67,7 +69,17 @@ const PublishedCardPage = () => {
   const handleShareFinalCard = () => {
     const recipientLink = `${window.location.origin}/cards/published/${card.id}`;
     navigator.clipboard.writeText(recipientLink);
-    alert("Recipient link copied to clipboard!");
+    toast("🔗 Link copied to clipboard!", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      draggablePercent: 0,
+      className: "custom-toast",
+      bodyClassName: "custom-toast-body",
+    });
   };
 
   if (isLoading) {
@@ -108,7 +120,7 @@ const PublishedCardPage = () => {
         />
         <div className="actions">
           {/* Navigation for mobile */}
-          <div >
+          <div>
             <div className="mobile-navigation">
               <ActionIcon
                 variant="filled"

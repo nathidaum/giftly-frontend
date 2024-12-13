@@ -1,4 +1,6 @@
 import { Routes, Route, Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import CardCreationPage from "./pages/CardCreationPage/CardCreationPage";
 import CardDetailsPage from "./pages/CardDetailsPage/CardDetailsPage";
 import ContributorPage from "./pages/ContributorPage/ContributorPage";
@@ -9,6 +11,7 @@ import PublishedCardPage from "./pages/PublishedCardPage/PublishedCardPage";
 function App() {
   return (
     <div>
+      <ToastContainer/>
       <Link to="/" className="logo-link">
         <img
           src="/logo-white-transparent.png"
