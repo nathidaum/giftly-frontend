@@ -1,5 +1,5 @@
 import React from "react";
-import { CloseButton } from '@mantine/core';
+import { CloseButton } from "@mantine/core";
 import "./GifModal.css";
 
 interface GifModalProps {
@@ -27,7 +27,11 @@ const GifModal: React.FC<GifModalProps> = ({
     <div className="gif-modal">
       <div className="gif-modal-overlay" onClick={onClose}></div>
       <div className="gif-modal-content">
-        <CloseButton className="close-modal-button" radius={50} onClick={onClose}/>
+        <CloseButton
+          className="close-modal-button"
+          radius={50}
+          onClick={onClose}
+        />
         <h2 className="gif-modal-title">Search for a GIF</h2>
         <div className="gif-search-section">
           <input
