@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Message } from "../../types";
 import "react-toastify/dist/ReactToastify.css";
 import { ActionIcon } from "@mantine/core";
 import { Button } from "@mantine/core";
@@ -9,8 +10,13 @@ import {
   IconChevronLeft,
   IconChevronRight,
   IconShare,
+  IconTrash
 } from "@tabler/icons-react";
-import { getCardById, publishCard } from "../../api/index";
+import {
+  getCardById,
+  publishCard,
+  deleteMessageFromCard,
+} from "../../api/index";
 import templates from "../../data/templates.json";
 import "./CardDetailsPage.css";
 
@@ -20,6 +26,7 @@ const CardDetailsPage = () => {
   const [card, setCard] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false); // Add this line
 
   useEffect(() => {
     if (!id) {
@@ -96,6 +103,41 @@ const CardDetailsPage = () => {
     } catch (error) {
       console.error("Error publishing card:", error);
       alert("Failed to publish the card. Please try again.");
+    }
+  };
+
+  const handleDeleteMessage = async (messageId: string) => {
+    if (!card) return;
+    setIsDeleting(true); // Start deleting state
+    try {
+      await deleteMessageFromCard(card.id, messageId); // Call the API function
+      const updatedMessages = card.messages.filter(
+        (message: Message) => message.id !== messageId
+      );
+
+      // Adjust the current slide index
+      const newCurrentSlide =
+        currentSlide > updatedMessages.length
+          ? Math.max(0, updatedMessages.length - 1)
+          : currentSlide;
+
+      setCard({
+        ...card,
+        messages: updatedMessages, // Update the messages
+      });
+      setCurrentSlide(newCurrentSlide); // Move to the next slide if needed
+      toast("🗑️ Message deleted successfully!", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
+    } catch (error) {
+      console.error("Error deleting message:", error);
+      toast.error("Failed to delete the message. Please try again.", {
+        position: "bottom-center",
+      });
+    } finally {
+      setIsDeleting(false); // End deleting state
     }
   };
 
@@ -178,6 +220,24 @@ const CardDetailsPage = () => {
                   - {card.messages[currentSlide - 1]?.author}
                 </p>
               </div>
+              <ActionIcon
+                variant="filled"
+                color="transparent"
+                size="md"
+                radius="xl"
+                aria-label="Delete Message"
+                style={{
+                  position: "absolute",
+                  bottom: "10px",
+                  right: "10px",
+                }}
+                onClick={() =>
+                  handleDeleteMessage(card.messages[currentSlide - 1]?.id)
+                } // Call delete function with message ID
+                disabled={isDeleting} // Disable button while deleting
+              >
+                <IconTrash size={20} />{" "}
+              </ActionIcon>
             </div>
           )}
         </div>
