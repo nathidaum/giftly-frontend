@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Confetti from "react-confetti";
 import axios from "axios";
 import { getCardByShareableLink, addMessageToCard } from "../../api";
@@ -64,7 +66,17 @@ const ContributorPage = () => {
 
   const handleGifSearch = async () => {
     if (!gifSearch.trim()) {
-      alert("Please enter a keyword to search for GIFs.");
+      toast("🔑 Please enter a keyword to search for GIFs.", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        draggablePercent: 0,
+        className: "custom-toast",
+        bodyClassName: "custom-toast-body",
+      });
       return;
     }
 

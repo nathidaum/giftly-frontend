@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ActionIcon } from "@mantine/core";
 import { Button } from "@mantine/core";
 import {
@@ -8,7 +10,7 @@ import {
   IconChevronRight,
   IconShare,
 } from "@tabler/icons-react";
-import { getCardById, publishCard } from "../../api/index"; // Import from api/index.ts
+import { getCardById, publishCard } from "../../api/index";
 import templates from "../../data/templates.json";
 import "./CardDetailsPage.css";
 
@@ -17,7 +19,7 @@ const CardDetailsPage = () => {
   const navigate = useNavigate();
   const [card, setCard] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentSlide, setCurrentSlide] = useState(0); // Track the current carousel slide
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     if (!id) {
@@ -63,13 +65,33 @@ const CardDetailsPage = () => {
   const handleShareCard = () => {
     const contributorLink = `${window.location.origin}/cards/share/${card.shareableLink}`;
     navigator.clipboard.writeText(contributorLink);
-    alert("Contributor link copied to clipboard!");
+    toast("🔗 Link copied to clipboard!", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      draggablePercent: 0,
+      className: "custom-toast",
+      bodyClassName: "custom-toast-body",
+    });
   };
 
   const handlePublishCard = async () => {
     try {
       const publishedCard = await publishCard(card.id);
-      alert("Card successfully published!");
+      toast("👏 Card successfully published!", {
+        position: "bottom-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        draggablePercent: 0,
+        className: "custom-toast",
+        bodyClassName: "custom-toast-body",
+      });
       navigate(`/cards/published/${publishedCard.id}`);
     } catch (error) {
       console.error("Error publishing card:", error);
