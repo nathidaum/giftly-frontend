@@ -86,6 +86,7 @@ const PublishedCardPage = () => {
         size="xl"
         radius="xl"
         aria-label="Settings"
+        className="desktop-navigation-icon"
       >
         <IconChevronLeft
           style={{ width: "70%", height: "70%" }}
@@ -107,6 +108,32 @@ const PublishedCardPage = () => {
           totalMessages={card.messages.length}
         />
         <div className="actions">
+          {/* Navigation for mobile */}
+          <div >
+            <div className="mobile-navigation">
+              <ActionIcon
+                variant="filled"
+                color="rgba(82, 82, 82, 1)"
+                size="lg"
+                radius="xl"
+                aria-label="Previous Slide"
+                onClick={handlePreviousSlide}
+              >
+                <IconChevronLeft />
+              </ActionIcon>
+              <ActionIcon
+                variant="filled"
+                color="rgba(82, 82, 82, 1)"
+                size="lg"
+                radius="xl"
+                aria-label="Next Slide"
+                onClick={handleNextSlide}
+              >
+                <IconChevronRight />
+              </ActionIcon>
+            </div>
+          </div>
+
           <ActionIcon
             variant="filled"
             color="rgba(82, 82, 82, 1)"
@@ -120,7 +147,8 @@ const PublishedCardPage = () => {
               onClick={handleShareFinalCard}
             />
           </ActionIcon>
-          <ActionIcon
+
+          {/* <ActionIcon
             variant="filled"
             color="rgba(82, 82, 82, 1)"
             size="xl"
@@ -131,7 +159,7 @@ const PublishedCardPage = () => {
               style={{ width: "70%", height: "70%" }}
               stroke={1.5}
             />
-          </ActionIcon>
+          </ActionIcon> */}
         </div>
       </div>
       <ActionIcon
@@ -140,6 +168,7 @@ const PublishedCardPage = () => {
         size="xl"
         radius="xl"
         aria-label="Settings"
+        className="desktop-navigation-icon"
       >
         <IconChevronRight
           style={{ width: "70%", height: "70%" }}

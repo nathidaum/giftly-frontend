@@ -12,8 +12,10 @@ import {
 const dampen = 40;
 
 const CardWrapper = styled(motion.div)`
-  width: 500px;
-  height: 700px;
+  width: 90vw; /* 90% of the viewport width */
+  max-width: 500px; /* Limit the width on larger screens */
+  height: 70vh; /* 70% of the viewport height */
+  max-height: 700px; /* Limit the height */
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(8px) brightness(1.2);
@@ -27,6 +29,11 @@ const CardWrapper = styled(motion.div)`
   transform-style: preserve-3d;
   overflow: hidden;
   position: relative;
+
+  @media (min-width: 768px) {
+    width: 500px; /* Fixed size for tablets and desktops */
+    height: 700px;
+  }
 `;
 
 const CardContent = styled.div`
@@ -90,9 +97,14 @@ const TextContent = styled.div`
 `;
 
 const MessageText = styled.p`
-  font-size: 1.2rem;
+  font-size: 1rem; /* Base size */
   color: white;
   margin-bottom: 10px;
+  text-align: justify;
+
+  @media (min-width: 768px) {
+    font-size: 1.2rem; /* Larger text on bigger screens */
+  }
 `;
 
 const AuthorText = styled.p`

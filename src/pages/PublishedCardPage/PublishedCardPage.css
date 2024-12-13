@@ -31,3 +31,25 @@
   justify-content: flex-end;
   align-items: flex-end
 }
+.mobile-navigation {
+  display: none
+}
+
+@media (max-width: 767px) {
+  .published-card-page {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 20px;
+    height: 100vh;
+  }
+  .desktop-navigation-icon {
+    display: none
+  }
+
+  .mobile-navigation {
+    display: flex; /* Show navigation icons below the card */
+    gap: 20px;
+    padding-right: 60px;
+  }
+}
