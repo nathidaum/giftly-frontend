@@ -17,7 +17,7 @@ The **backend repository** with the API implementation can be found [here](https
 ### 2. Clone the repository
 ```bash
 git clone https://github.com/nathidaum/giftly-frontend.git
-cd spots-frontend
+cd giftly-frontend
 ```
 ### 2. Install Dependencies
 
