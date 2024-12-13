@@ -154,3 +154,21 @@
   gap: 10px;
   margin-top: 10px;
 }
+
+
+@media (max-width: 767px) {
+  .contributor-page {
+    flex-direction: column;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 90vw;
+  }
+  .contributor-card-preview {
+    width: 90vw;
+    height: 60vh;
+    margin: 10px 0 20px;
+  }
+  .contributor-button {
+    margin: 0px;
+  }
+}
