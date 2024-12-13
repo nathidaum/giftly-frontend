@@ -5,8 +5,7 @@ import { ActionIcon } from "@mantine/core";
 import {
   IconChevronLeft,
   IconChevronRight,
-  IconSend,
-  IconDownload,
+  IconSend
 } from "@tabler/icons-react";
 import templates from "../../data/templates.json";
 import "./PublishedCardPage.css";
@@ -147,19 +146,6 @@ const PublishedCardPage = () => {
               onClick={handleShareFinalCard}
             />
           </ActionIcon>
-
-          {/* <ActionIcon
-            variant="filled"
-            color="rgba(82, 82, 82, 1)"
-            size="xl"
-            radius="xl"
-            aria-label="Settings"
-          >
-            <IconDownload
-              style={{ width: "70%", height: "70%" }}
-              stroke={1.5}
-            />
-          </ActionIcon> */}
         </div>
       </div>
       <ActionIcon
