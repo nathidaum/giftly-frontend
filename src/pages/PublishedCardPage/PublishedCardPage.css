@@ -37,9 +37,10 @@
 
 @media (max-width: 767px) {
   .published-card-page {
+    margin-top: 10%; 
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center items horizontally */
+    flex-direction: column; 
+    align-items: flex-start;
     gap: 20px;
     height: 100vh;
   }
@@ -48,7 +49,7 @@
   }
 
   .mobile-navigation {
-    display: flex; /* Show navigation icons below the card */
+    display: flex;
     gap: 20px;
     padding-right: 60px;
   }
