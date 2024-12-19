@@ -109,23 +109,26 @@
 @media (max-width: 767px) {
   .card-details-page {
     flex-direction: column;
-    margin-top: 50px;
- 
+    justify-content: flex-start;
+    margin-top: 10%;
   }
   .card-details-page p {
     font-size: 0.9em;
   }
   .insructions {
     display: none;
+    align-items: flex-start;
   }
   .details-left {
+    align-items: flex-start;
     width: 100vw;
-    margin: 0;
-    padding: 5px 20px;
+    padding: 0 20px;
   }
   .carousel-slide {
     width: 90vw;
     height: 60vh;
+    min-height: 500px;
+    min-width: 350;
     margin: 20px 0;
   }
   .carousel-text {
