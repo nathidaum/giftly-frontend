@@ -65,7 +65,7 @@ const CardCreationPage = () => {
             type="text"
             placeholder="Celebrating Alex!"
             value={title}
-            size={500}
+            size={350}
             onChange={(e) => setTitle(e.target.value)}
             className="card-creation-input"
           />
