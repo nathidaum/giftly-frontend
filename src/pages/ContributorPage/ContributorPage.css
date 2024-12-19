@@ -8,7 +8,6 @@
   height: 100vh;
 }
 
-/* Contributor Container */
 .contributor-container {
   display: flex;
   flex-direction: column;
@@ -24,6 +23,7 @@
   text-align: left;
   padding-right: 20px;
   color: rgba(255, 255, 255, 0.3);
+  width: 50%;
 }
 
 .contributor-info h1 {
@@ -31,7 +31,6 @@
   text-align: left;
 }
 
-/* Submit Button */
 .contributor-button {
   padding: 10px 20px;
   margin: 20px 0px;
@@ -52,8 +51,6 @@
   cursor: not-allowed;
 }
 
-
-/* Card Preview */
 .contributor-card-preview {
   width: 500px;
   height: 700px;
@@ -159,14 +156,22 @@
 @media (max-width: 767px) {
   .contributor-page {
     flex-direction: column;
-    margin-top: 20px;
+    justify-content: flex-start;
+    margin-top: 20%;
     width: 100%;
     max-width: 90vw;
   }
+
+  .contributor-info {
+    width: 100%;
+  }
+
   .contributor-card-preview {
     width: 90vw;
     height: 60vh;
     margin: 10px 0 20px;
+    min-height: 500px;
+    min-width: 350;
   }
   .contributor-button {
     margin: 0px;
